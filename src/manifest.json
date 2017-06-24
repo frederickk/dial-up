@@ -13,7 +13,7 @@
     "author": "Ken Frederick",
 
     "background": {
-        "persistent": false,
+        "persistent": true,
         "scripts": [
             "app/background.js"
         ]
@@ -24,6 +24,9 @@
     },
     "offline_enabled": true,
     "permissions": [
-        "tabs"
+        "tabs",
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>"
     ]
 }

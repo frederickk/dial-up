@@ -39,6 +39,8 @@ class DialUp {
             image : document.getElementById('aol-friends')
         };
 
+        this._disconnected();
+
         this.initEvents();
     }
 
@@ -57,6 +59,12 @@ class DialUp {
     _unhide(element) {
         // element.classList.remove('hidden');
         element.classList.remove('invisible');
+    }
+
+    _disconnected() {
+        chrome.runtime.sendMessage({
+            connected: false
+        });
     }
 
     _connected() {

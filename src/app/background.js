@@ -20,7 +20,8 @@ class Background {
     //
     // ------------------------------------------------------------------------
     constructor() {
-        this.isConnected = false;
+        this.isConnected = true;
+        this.tabId = 0;
 
         this.initEvents();
     }
@@ -37,7 +38,10 @@ class Background {
             currentWindow: true,
             title: 'Boop beep bop beep boop bop beep boop ppprrrrrrrttttttt prrt eet prtt eeeeeeeeeeeeeee prrrrrrrrrrrrrrrtttt grrrr wee ooo wee ooo wee'
         }, (tabs) => {
-            callback(tabs);
+            if (tabs.length != 0) {
+                this.tabId = tabs[0].id;
+                callback(tabs);
+            }
         });
     }
 
@@ -50,29 +54,50 @@ class Background {
     // ------------------------------------------------------------------------
     initEvents() {
         // chrome.webRequest.onBeforeRequest.addListener((details) => {
-        //     return {
-        //         cancel: true
-        //     };
+        //     // prevents user from surfing web... overkill :/
+        //     if (!this.isConnected) {
+        //         return {
+        //             cancel: true
+        //         };
+        //     }
         // }, {
         //     urls: ['<all_urls>']
         // }, ['blocking']);
 
-        chrome.tabs.onActivated.addListener((activeInfo) => {
-            this._tabHandler((tabs) => {
-                if (tabs.length != 0 && !this.isConnected) {
-                    chrome.tabs.update(tabs[0].id, {
-                        selected: true
-                    });
-                }
-            });
-        });
 
         chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             this.isConnected = request.connected;
 
             this._tabHandler((tabs) => {
+                // once connected close newtab
                 if (this.isConnected) {
                     chrome.tabs.remove(tabs[0].id);
+                }
+            });
+        });
+
+
+        chrome.tabs.onRemoved.addListener((tabId) => {
+            // if user closes any tab everything is back to normal
+            this.isConnected = true;
+        });
+        chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+            // prevents user from changing URL... annoying :)
+            if (tabId == this.tabId && !this.isConnected) {
+                if (tab.url !== 'chrome://newtab/') {
+                    chrome.tabs.update(tabId, {
+                        url: 'chrome://newtab/'
+                    });
+                }
+            }
+        });
+        chrome.tabs.onActivated.addListener((activeInfo) => {
+            // prevents user from changing to a different tab... annoying :)
+            this._tabHandler((tabs) => {
+                if (tabs.length != 0 && !this.isConnected) {
+                    chrome.tabs.update(tabs[0].id, {
+                        selected: true
+                    });
                 }
             });
         });
