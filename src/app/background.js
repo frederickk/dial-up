@@ -53,6 +53,12 @@ class Background {
     //
     // ------------------------------------------------------------------------
     initEvents() {
+        /*
+            if you uncomment this, add the following to the manifest "permissions":
+            "webRequest",
+            "webRequestBlocking",
+            "<all_urls>"
+         */
         // chrome.webRequest.onBeforeRequest.addListener((details) => {
         //     // prevents user from surfing web... overkill :/
         //     if (!this.isConnected) {

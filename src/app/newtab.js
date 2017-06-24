@@ -89,7 +89,7 @@ class DialUp {
             const pct = (this.boopbeep.currentTime / this.boopbeep.duration) * 100;
             // console.log(`${pct}%`);
 
-            if (pct > 13 && pct < 92) {
+            if (pct > 21 && pct < 92) {
                 this._hide(this.dialing.text);
                 this._unhide(this.connecting.text);
                 this._unhide(this.connecting.image);

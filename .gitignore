@@ -20,4 +20,4 @@ Thumbs.db
 # Files #
 ###################
 info.txt
-ftab.pem
+*.pem
