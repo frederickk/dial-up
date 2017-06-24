@@ -53,12 +53,16 @@ class DialUp {
     // ------------------------------------------------------------------------
     _hide(element) {
         // element.classList.add('hidden');
-        element.classList.add('invisible');
+        if (!element.classList.contains('invisible')) {
+            element.classList.add('invisible');
+        }
     }
 
     _unhide(element) {
         // element.classList.remove('hidden');
-        element.classList.remove('invisible');
+        if (element.classList.contains('invisible')) {
+            element.classList.remove('invisible');
+        }
     }
 
     _disconnected() {
