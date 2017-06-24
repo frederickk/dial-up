@@ -22,6 +22,9 @@ class DialUp {
         console.log('Boop beep bop beep boop bop beep boop ppprrrrrrrrrrrrrrttttttt prrt eet prtt eeeeeeeeeeeeeee prrrrrrrrrrrrrrrrtttt grrrr wee ooo wee ooo wee ffffffffffffffffffffffffffffff fffffffffffffffff ssssshhhhhhhhhh');
 
         this.boopbeep = document.getElementById('boopbeep');
+        this.welcome = document.getElementById('welcome');
+
+        this.status = document.getElementById('status');
 
         this.dialing = {
             text  : document.getElementById('dialing'),
@@ -47,11 +50,13 @@ class DialUp {
     //
     // ------------------------------------------------------------------------
     _hide(element) {
-        element.classList.add('hidden');
+        // element.classList.add('hidden');
+        element.classList.add('invisible');
     }
 
     _unhide(element) {
-        element.classList.remove('hidden');
+        // element.classList.remove('hidden');
+        element.classList.remove('invisible');
     }
 
 
@@ -75,7 +80,16 @@ class DialUp {
                 this._unhide(this.connected.text);
                 this._unhide(this.connected.image);
             }
+
+            if (pct >= 100) {
+                this.welcome.play();
+                document.body.removeChild(this.boopbeep);
+
+                this.status.classList.add('invisible');
+            }
         });
     }
 
 }
+
+new DialUp();
