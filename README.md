@@ -1,7 +1,7 @@
 Dial Up
 ==============
 
-Boop beep bop beep boop bop beep boop ppprrrrrrrrrrrrrrttttttt prrt eet prtt eeeeeeeeeeeeeee prrrrrrrrrrrrrrrrtttt grrrr wee ooo wee ooo wee ffffffffffffffffffffffffffffff fffffffffffffffff ssssshhhhhhhhhh
+[Boop beep bop beep boop bop beep boop ppprrrrrrrrrrrrrrttttttt prrt eet prtt eeeeeeeeeeeeeee prrrrrrrrrrrrrrrrtttt grrrr wee ooo wee ooo wee ffffffffffffffffffffffffffffff fffffffffffffffff ssssshhhhhhhhhh](https://chrome.google.com/webstore/detail/dial-up/fkgncpkpmfcbbpbhlbpdaahlpikbfmgf)
 
 
 ![dial-up](screenshots/dial-up.png)
