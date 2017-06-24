@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "__MSG_extName__",
-    "version": "0.0.2",
+    "version": "0.0.3",
 
     "description": "__MSG_extDesc__",
     "default_locale": "en",
@@ -12,10 +12,18 @@
 
     "author": "Ken Frederick",
 
+    "background": {
+        "persistent": false,
+        "scripts": [
+            "app/background.js"
+        ]
+    },
+
     "chrome_url_overrides": {
         "newtab": "newtab.html"
     },
     "offline_enabled": true,
     "permissions": [
+        "tabs"
     ]
 }

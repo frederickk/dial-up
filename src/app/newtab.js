@@ -15,7 +15,7 @@
 class DialUp {
     // ------------------------------------------------------------------------
     //
-    // Properties
+    // Constructor
     //
     // ------------------------------------------------------------------------
     constructor() {
@@ -59,6 +59,13 @@ class DialUp {
         element.classList.remove('invisible');
     }
 
+    _connected() {
+        chrome.runtime.sendMessage({
+            connected: true
+        });
+    }
+
+
 
     // ------------------------------------------------------------------------
     //
@@ -84,8 +91,17 @@ class DialUp {
             if (pct >= 100) {
                 this.welcome.play();
                 document.body.removeChild(this.boopbeep);
+            }
+        });
 
+        this.welcome.addEventListener('timeupdate', () => {
+            const pct = (this.welcome.currentTime / this.welcome.duration) * 100;
+            // console.log(`${pct}%`);
+
+            if (pct >= 100) {
                 this.status.classList.add('invisible');
+                this._connected();
+                document.body.removeChild(this.welcome);
             }
         });
     }
